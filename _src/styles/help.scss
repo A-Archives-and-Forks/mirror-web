@@ -552,7 +552,7 @@
 $hover-transition-duration: 0.25s;
 $icon-transition-duration: 0.1s;
 
-pre.codeblock {
+div.codeblock {
   position: relative;
   & > button.btn-clipboard {
     [data-cannot-copy] & {
@@ -561,7 +561,7 @@ pre.codeblock {
     display: block;
     line-height: 1;
     color: var(--bs-body-color);
-    background-color: inherit;
+    background-color: map.get(bs.$utilities-bg-subtle, "secondary-subtle");
     border: 0;
     transition:
       color $hover-transition-duration,
@@ -571,8 +571,12 @@ pre.codeblock {
     &:focus-visible {
       color: var(--bs-link-hover-color);
     }
-    margin-top: 0;
-    margin-right: 0;
+    margin-top: calc(
+      var(--#{bs.$prefix}border-width) + map.get(bs.$spacers, 2)
+    );
+    margin-right: calc(
+      var(--#{bs.$prefix}border-width) + map.get(bs.$spacers, 2)
+    );
     opacity: 0;
     position: absolute;
     span {
@@ -610,10 +614,7 @@ pre.codeblock {
     top: 0;
     right: 0;
     z-index: 3;
-    padding-top: map.get(bs.$spacers, 2);
-    padding-right: map.get(bs.$spacers, 2);
-    padding-left: 0;
-    padding-bottom: 0;
+    padding: 0;
   }
   &:hover > button.btn-clipboard,
   &:focus-within > button.btn-clipboard,

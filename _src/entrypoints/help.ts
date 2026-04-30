@@ -104,8 +104,8 @@ const debugRestore = ref(false);
   elem.addEventListener("change", changeHandler);
 });
 
-const attachCopyButton = (preElem: Element, getRawCode: () => string) => {
-  const copyButton = preElem.querySelector("button.btn-clipboard");
+const attachCopyButton = (containerElem: Element, getRawCode: () => string) => {
+  const copyButton = containerElem.querySelector("button.btn-clipboard");
   if (copyButton) {
     copyButton.addEventListener("click", () => {
       navigator.clipboard.writeText(getRawCode()).then(
@@ -133,7 +133,7 @@ const attachCopyButton = (preElem: Element, getRawCode: () => string) => {
   let rawCode = "";
   if (elem.tagName.toLowerCase() === "pre") {
     codeContainer = elem.querySelector("code");
-    attachCopyButton(elem, () => rawCode);
+    attachCopyButton(elem.parentElement, () => rawCode);
   } else {
     codeContainer = elem;
   }
@@ -166,10 +166,10 @@ const attachCopyButton = (preElem: Element, getRawCode: () => string) => {
   });
 });
 
-[...document.querySelectorAll("pre.codeblock:not([data-z-code])")].forEach(
+[...document.querySelectorAll(".codeblock > pre:not([data-z-code])")].forEach(
   (elem) => {
     const rawCode = elem.querySelector("code[data-original-code]").textContent;
-    attachCopyButton(elem, () => rawCode);
+    attachCopyButton(elem.parentElement, () => rawCode);
   },
 );
 

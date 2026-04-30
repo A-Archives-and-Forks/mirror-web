@@ -111,9 +111,11 @@ export function renderCodeBlock(
   otherAttrs: Record<string, string>,
 ) {
   return renderToStaticMarkup(
-    <pre {...otherAttrs} className="codeblock">
-      <code dangerouslySetInnerHTML={{ __html: renderedCode }}></code>
-      {code != null && <code data-original-code>{code}</code>}
+    <div className="codeblock">
+      <pre {...otherAttrs}>
+        <code dangerouslySetInnerHTML={{ __html: renderedCode }}></code>
+        {code != null && <code data-original-code>{code}</code>}
+      </pre>
       <button
         type="button"
         className="btn-clipboard"
@@ -126,6 +128,6 @@ export function renderCodeBlock(
           >{`{%endraw%}{% fa_svg fas.fa-clipboard-check %}{%raw%}`}</i>
         </span>
       </button>
-    </pre>,
+    </div>,
   );
 }
