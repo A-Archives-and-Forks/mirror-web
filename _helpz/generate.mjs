@@ -269,6 +269,15 @@ enablePages.forEach((page) => {
     );
     const tokenizer = new MarkdownIt("commonmark");
     tokenizer.use(mystPlugin);
+    (() => {
+      const origNormalizeLink = tokenizer.normalizeLink;
+      tokenizer.normalizeLink = function (link) {
+        if (link.startsWith("jekyll-keep:")) {
+          return link.replace(/^jekyll-keep:/, "");
+        }
+        return origNormalizeLink.call(this, link);
+      };
+    })();
     const mdast = tokensToMyst(
       blockContent,
       tokenizer.parse(blockContent, {
