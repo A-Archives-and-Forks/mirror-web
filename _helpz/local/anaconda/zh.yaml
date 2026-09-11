@@ -1,3 +1,11 @@
+block:
+- intro
+- distribution
+- usage
+- usage-community
+- customs
+- miniconda
+- miniforge
 input:
   channel:
     _: 第三方源
